@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Message Classifier</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #38bdf8;
+        }
+
+        textarea {
+            width: 60%;
+            height: 100px;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #38bdf8;
+            color: black;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📩 Smart Message Classifier</h1>
+
+    <div class="card">
+        <textarea id="text" placeholder="Type your message..."></textarea><br>
+        <button onclick="predict()">Classify</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+<script>
+async function predict() {
+    const text = document.getElementById("text").value;
+
+    const res = await fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            text: text
+        })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("result").innerHTML =
+        "Category: <b>" + data.category + "</b><br>" +
+        "Confidence: <b>" + data.confidence + "%</b>";
+}
+</script>
+
+</body>
+</html>
