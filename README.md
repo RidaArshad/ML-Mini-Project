@@ -164,6 +164,6 @@ Through this project, concepts learned include:
 - FastAPI architecture
 - Real-time prediction systems
 
-# ⭐ Conclusion
+#  Conclusion
 
 This project is a simple yet effective demonstration of how Machine Learning can be combined with web technologies to create intelligent applications capable of real-time text classification.
